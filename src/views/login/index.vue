@@ -5,7 +5,7 @@
           <img src="../../assets/logo_admin.png" alt="">
           <el-form-itme>
             <el-input v-model="loginForm.mobile" placeholder="请输入手机号" style="margin-bottom:20px;"></el-input>
-            <el-input v-model="code" placeholder="请输入验证码" style="width:238px;margin-right:10px;"></el-input>
+            <el-input v-model="loginForm.code" placeholder="请输入验证码" style="width:238px;margin-right:10px;"></el-input>
             <el-button>发送验证码</el-button>
             <el-checkbox :value="true" style="margin-top: 30px;">我已阅读和同意用户协议和隐私条款</el-checkbox>
             <el-button type="primary" style="margin-top:30px;width:100%">登录</el-button>
