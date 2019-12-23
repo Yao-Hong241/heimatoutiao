@@ -3,13 +3,21 @@
     <div id="login">
       <el-card class="my-card">
           <img src="../../assets/logo_admin.png" alt="">
-          <el-form-itme>
-            <el-input v-model="loginForm.mobile" placeholder="请输入手机号" style="margin-bottom:20px;"></el-input>
-            <el-input v-model="loginForm.code" placeholder="请输入验证码" style="width:238px;margin-right:10px;"></el-input>
-            <el-button>发送验证码</el-button>
-            <el-checkbox :value="true" style="margin-top: 30px;">我已阅读和同意用户协议和隐私条款</el-checkbox>
-            <el-button type="primary" style="margin-top:30px;width:100%">登录</el-button>
-          </el-form-itme>
+          <el-form :model="loginForm">
+            <el-form-item>
+              <el-input v-model="loginForm.mobile" placeholder="请输入手机号"></el-input>
+            </el-form-item>
+            <el-form-item>
+              <el-input v-model="loginForm.code" placeholder="请输入验证码" style="width:238px;margin-right:10px;"></el-input>
+              <el-button>发送验证码</el-button>
+            </el-form-item>
+            <el-form-item>
+              <el-checkbox :value="true">我已阅读和同意用户协议和隐私条款</el-checkbox>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary" style="width:100%">登 录</el-button>
+            </el-form-item>
+          </el-form>
       </el-card>
     </div>
   </div>
@@ -48,7 +56,7 @@ export default {
     img {
       width: 200px;
       display: block;
-      margin: 0 auto 20px;
+      margin: 0 auto 30px;
     }
   }
 }
