@@ -45,15 +45,15 @@
         <el-header>
           <span @click="toggleAside" class="el-icon-s-fold icon"></span>
           <span class="text">江苏传智播客科技教育有限公司</span>
-          <el-dropdown>
+          <el-dropdown @command="handler">
             <span class="el-dropdown-link">
-              <img src="../../assets/avatar.jpg" alt />
-              <span class="cai">用户名</span>
+              <img :src="photo" alt />
+              <span class="cai">{{name}}</span>
               <i class="el-icon-arrow-down el-icon--right"></i>
             </span>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item icon="el-icon-setting">个人设置</el-dropdown-item>
-              <el-dropdown-item icon="el-icon-switch-button">退出登录</el-dropdown-item>
+              <el-dropdown-item command="setting" icon="el-icon-setting">个人设置</el-dropdown-item>
+              <el-dropdown-item command="logout" icon="el-icon-switch-button">退出登录</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </el-header>
@@ -66,15 +66,36 @@
 </template>
 
 <script>
+import store from '@/store'
 export default {
   data: function () {
     return {
-      isOpen: true
+      isOpen: true,
+      name: '',
+      photo: ''
     }
+  },
+  created () {
+    const user = store.getUser()
+    this.name = user.name
+    this.photo = user.photo
   },
   methods: {
     toggleAside () {
       this.isOpen = !this.isOpen
+    },
+    // 去个人设置
+    setting () {
+      this.$router.push('/setting')
+    },
+    // 退出登录
+    logout () {
+      store.delUser()
+      this.$router.push('/login')
+    },
+    // 处理指令函数
+    handler (command) {
+      this[command]()
     }
   }
 }

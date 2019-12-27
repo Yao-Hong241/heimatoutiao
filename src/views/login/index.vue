@@ -15,7 +15,7 @@
               <el-checkbox :value="true">我已阅读和同意用户协议和隐私条款</el-checkbox>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" style="width:100%" @click="login">登 录</el-button>
+              <el-button type="primary" style="width:100%" @click="login()">登 录</el-button>
             </el-form-item>
           </el-form>
       </el-card>
@@ -35,8 +35,8 @@ export default {
     }
     return {
       loginForm: {
-        mobile: '',
-        code: ''
+        mobile: '13911111111',
+        code: '246810'
       },
       loginRules: {
         mobile: [
