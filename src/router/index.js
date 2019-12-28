@@ -8,6 +8,8 @@ import home from '@/views/home'
 import welcome from '@/views/welcome'
 import notfound from '@/views/NotFound'
 import store from '@/store'
+import article from '@/views/article'
+
 Vue.use(VueRouter)
 
 const router = new VueRouter({
@@ -17,7 +19,8 @@ const router = new VueRouter({
     { path: '/',
       component: home,
       children: [
-        { path: '/', component: welcome }
+        { path: '/', component: welcome },
+        { path: '/article', component: article }
       ]
     },
     { path: '*', component: notfound }
