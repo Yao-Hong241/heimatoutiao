@@ -7,7 +7,7 @@ axios.defaults.baseURL = 'http://ttapi.research.itcast.cn/mp/v1_0'
 
 // 请求拦截器
 axios.interceptors.request.use(config => {
-  config.headers.Authorization = `Bearer${store.getUser().token}`
+  config.headers.Authorization = `Bearer ${store.getUser().token}`
   return config
 }, err => {
   Promise.reject(err)

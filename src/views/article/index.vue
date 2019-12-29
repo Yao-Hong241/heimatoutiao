@@ -107,15 +107,13 @@ export default {
     // 获取频道选项的数据
     async getChannelOptions () {
       const {
-        data: { data }
-      } = await this.$http.get('channels')
+        data: { data } } = await this.$http.get('channels')
       this.channelOptions = data.channels
     },
     // 获取文章列表数据
     async getArticles () {
       const {
-        data: { data }
-      } = await this.$http.get('articles', { params: this.filterParams })
+        data: { data } } = await this.$http.get('articles', { params: this.filterParams })
       this.articles = data.results
     }
   }
