@@ -4,6 +4,7 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import router from '@/router'
 import axios from '@/api'
+import '@/styles/index.less'
 // 使用自己的插件
 import plugin from '@/plugin'
 Vue.use(plugin)
