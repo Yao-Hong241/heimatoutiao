@@ -8,8 +8,8 @@
       <el-row>
         <el-col :span="12">
           <el-form label-width="120px">
-            <el-form-item label="编号：">001</el-form-item>
-            <el-form-item label="手机：">13911111111</el-form-item>
+            <el-form-item label="编号：">{{user.id}}</el-form-item>
+            <el-form-item label="手机：">{{user.mobile}}</el-form-item>
             <el-form-item label="媒体名称：">
               <el-input v-model="user.name"></el-input>
             </el-form-item>
@@ -20,17 +20,28 @@
               <el-input v-model="user.email"></el-input>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary">保存设置</el-button>
+              <el-button @click="updateUserInfo" type="primary">保存设置</el-button>
             </el-form-item>
           </el-form>
         </el-col>
-        <el-col :span="12"></el-col>
+        <el-col :span="12">
+          <el-upload
+            class="avatar-uploader"
+            action=""
+            :show-file-list="false"
+            :http-request="updateUserPhoto">
+            <img v-if="user.photo" :src="user.photo" class="avatar">
+            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+          </el-upload>
+          <p style="text-align: center">修改头像</p>
+        </el-col>
       </el-row>
     </el-card>
   </div>
 </template>
 
 <script>
+import eventBus from '@/eventBus'
 export default {
   data () {
     return {
@@ -38,15 +49,50 @@ export default {
       user: {
         name: '',
         intro: '',
-        email: ''
+        email: '',
+        photo: ''
       }
     }
   },
   created () {
-    // this.
+    this.getUserInfo()
   },
-  methods () {
-
+  methods: {
+    // 修改个人头像
+    async updateUserPhoto ({ file }) {
+      try {
+        // 得到文件对象
+        const formdata = new FormData()
+        // 追加文件对象，对象的key必须和接口需求一样
+        formdata.append('photo', file)
+        // 通过axios提交数据
+        const { data: { data } } = await this.$http.patch('user/photo', formdata)
+        this.$message.success('修改头像成功')
+        // 预览
+        this.user.photo = data.photo
+        // 把头像地址传递到home组件
+        eventBus.$emit('updateUserPhoto', data.photo)
+      } catch (e) {
+        this.$message.error('修改头像失败')
+      }
+    },
+    // 修改个人资料
+    async updateUserInfo () {
+      try {
+        const { name, intro, email } = this.user
+        await this.$http.patch('user/profile', { name, intro, email })
+        this.$message.success('保存个人信息成功')
+        // 更新home组件的用户名称
+        eventBus.$emit('updateUserName', name)
+      } catch (e) {
+        this.$message.error('保存个人信息失败')
+      }
+    },
+    // 获取个人资料
+    async getUserInfo () {
+      const { data: { data } } = await this.$http.get('user/profile')
+      this.user = data
+    }
   }
 }
 </script>
