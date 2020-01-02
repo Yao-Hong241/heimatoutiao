@@ -26,7 +26,8 @@
       <el-pagination
         background
         layout="prev, pager, next"
-        :total="total" :current-page="filterParams.page"
+        :total="total"
+        :current-page="filterParams.page"
         :page-size="filterParams.per_page"
         @current-change="changePager"
         :hide-on-single-page="true">
@@ -92,6 +93,8 @@ export default {
         this.dialogVisible = false
         // 更新页面
         this.getImages()
+        // 添加完清空预览
+        this.imageUrl = null
       }, 1000)
     },
     // 打开对话框
