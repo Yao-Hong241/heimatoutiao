@@ -16,10 +16,10 @@
             <el-button
               @click="toggleStatus(scope.row)"
               v-if="scope.row.comment_status"
-              type="danger"
+              type="success"
               size="small"
             >关闭评论</el-button>
-            <el-button @click="toggleStatus(scope.row)" v-else type="success" size="small">打开评论</el-button>
+            <el-button @click="toggleStatus(scope.row)" v-else type="danger" size="small">打开评论</el-button>
           </template>
         </el-table-column>
       </el-table>
